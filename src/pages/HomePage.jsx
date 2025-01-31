@@ -1,21 +1,27 @@
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'react-use';
-import { getTrendingMovies, updateSearchCount } from '../appwrite.js';
+import { getTrendingMovies, updateSearchCount } from '../services/appwrite.js';
 import MovieCard from './MovieCard.jsx';
 import Search from '../components/Search.jsx';
 import Spinner from '../components/Spinner.jsx';
 import { API_BASE_URL, API_OPTIONS } from '../constants/index.js';
 import Pagination from '../components/Pagination.jsx';
+import { useQuery } from '@tanstack/react-query';
 
 const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [movieList, setMovieList] = useState([]);
-  const [trendingMovies, setTrendingMovies] = useState([]);
+  // const [trendingMovies, setTrendingMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(50);
+
+  const { data: trendingMovies = [] } = useQuery({
+    queryKey: ['trendingMovies'],
+    queryFn: getTrendingMovies,
+  });
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
@@ -32,14 +38,14 @@ const HomePage = () => {
   // Optimize search - useDebounce()
   useDebounce(() => setDebouncedSearchTerm(searchTerm), 500, [searchTerm]);
 
-  const fetchTrendingMovies = async () => {
-    try {
-      const movie = await getTrendingMovies();
-      setTrendingMovies(movie);
-    } catch (error) {
-      console.error(`Error fetching trending movies: ${error}`);
-    }
-  };
+  // const fetchTrendingMovies = async () => {
+  //   try {
+  //     const movie = await getTrendingMovies();
+  //     setTrendingMovies(movie);
+  //   } catch (error) {
+  //     console.error(`Error fetching trending movies: ${error}`);
+  //   }
+  // };
 
   const fetchMovies = async (query = '') => {
     setIsLoading(true);
@@ -81,9 +87,9 @@ const HomePage = () => {
     fetchMovies(debouncedSearchTerm);
   }, [debouncedSearchTerm, currentPage]);
 
-  useEffect(() => {
-    fetchTrendingMovies();
-  }, []);
+  // useEffect(() => {
+  //   fetchTrendingMovies();
+  // }, []);
 
   return (
     <main>

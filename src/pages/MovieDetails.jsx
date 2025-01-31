@@ -1,13 +1,14 @@
 import { Fragment, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { API_BASE_URL, API_OPTIONS } from '../constants';
 import { convertRuntime, formatNumber } from '../utils';
+import { useMoveBack } from '../hooks/useMoveBack';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState({});
   const [trailerKey, setTrailerKey] = useState(null);
   const { id } = useParams();
-  const navigate = useNavigate();
+  const moveBack = useMoveBack();
 
   const {
     title,
@@ -63,7 +64,7 @@ const MovieDetails = () => {
     <section className="movie-details">
       <div className="movie-card p-10">
         <div className="back-btn">
-          <button className="btn" onClick={() => navigate(-1)}>
+          <button className="btn" onClick={moveBack}>
             Visit Homepage{' '}
             <img src="/arrowRight.svg" alt="arrow icon" className="w-3 h-3" />
           </button>
