@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { API_BASE_URL, API_OPTIONS } from '../constants';
 import { convertRuntime, formatNumber } from '../utils';
 import { useMoveBack } from '../hooks/useMoveBack';
-import axios from 'axios';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState({});
@@ -32,27 +31,27 @@ const MovieDetails = () => {
   const fetchMovieDetails = async (id) => {
     try {
       const endpoint = `${API_BASE_URL}/movie/${id}`;
-      const { data } = await axios.get(endpoint, API_OPTIONS);
-      // const data = await res.json();
+      const res = await fetch(endpoint, API_OPTIONS);
+      const data = await res.json();
 
       setMovieDetails(data);
     } catch (error) {
-      console.error(`Error fetching movie details: ${error.message}`);
+      console.error(`Error fetching movie details: ${error}`);
     }
   };
 
   const fetchMovieTrailer = async (movie_id) => {
     try {
       const endpoint = `${API_BASE_URL}/movie/${movie_id}/videos?language=en-US`;
-      const { data } = await axios.get(endpoint, API_OPTIONS);
+      const res = await fetch(endpoint, API_OPTIONS);
 
-      // const data = await res.json();
+      const data = await res.json();
       const trailer = data.results.find(
         (video) => video.site === 'YouTube' && video.type === 'Trailer'
       );
       setTrailerKey(trailer ? trailer.key : null);
     } catch (error) {
-      console.error(`Error fetching movie trailer: ${error.message}`);
+      console.error(`Error fetching movie trailer: ${error}`);
     }
   };
 
