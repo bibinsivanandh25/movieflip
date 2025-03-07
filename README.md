@@ -3,6 +3,7 @@
 A React application that fetches and displays movie data from TMDB API, with trending movies stored in Appwrite for persistence. Users can search for movies, navigate through paginated results, and view detailed movie information.
 
 
+
 🚀 Features
 
 - Trending Movies Section – Fetches trending movies from TMDB and stores them in Appwrite.
@@ -14,11 +15,14 @@ A React application that fetches and displays movie data from TMDB API, with tre
 - Responsive UI – Styled with Tailwind CSS for a modern and mobile-friendly experience.
 
 
+
 🛠️ Tech Stack
 
 - Frontend: React, React Router, Tailwind CSS
 - Data Fetching: Fetch API, TMDB API
 - Database & Backend: Appwrite
+
+
 
 📦 Installation
 
@@ -34,6 +38,7 @@ Set up environment variables:
 
 Start the development server:
 npm start
+
 
 
 📸 Screenshots
