@@ -50,18 +50,21 @@ const HomePage = () => {
   const fetchMovies = async (query = '') => {
     setIsLoading(true);
     setErrorMessage('');
+
     try {
       const endpoint = query
         ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(
             query
           )}&page=${currentPage}`
         : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc&page=${currentPage}`;
-      const response = await fetch(endpoint, API_OPTIONS);
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch movies from API');
-      }
-      const data = await response.json();
+      const { data } = await axios.get(endpoint, API_OPTIONS);
+
+      // if (!response.ok) {
+      //   throw new Error('Failed to fetch movies from API');
+      // }
+
+      // const data = await response.json();
 
       if (data.Response === 'False') {
         setErrorMessage(data.Error || 'Failed to fetch movies from API');
@@ -76,7 +79,7 @@ const HomePage = () => {
         await updateSearchCount(query, data.results[0]);
       }
     } catch (error) {
-      console.error(`Error fetching movies: ${error}`);
+      console.error(`Error fetching movies: ${error.message}`);
       setErrorMessage(`Error fetching movies. Please try again later.`);
     } finally {
       setIsLoading(false);
