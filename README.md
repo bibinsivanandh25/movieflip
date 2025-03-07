@@ -4,6 +4,7 @@ A React application that fetches and displays movie data from TMDB API, with tre
 
 
 🚀 Features
+
 - Trending Movies Section – Fetches trending movies from TMDB and stores them in Appwrite.
 - Movie Search – Allows users to search for movies by title.
 - Pagination – Supports navigating through multiple pages of search results.
@@ -14,11 +15,13 @@ A React application that fetches and displays movie data from TMDB API, with tre
 
 
 🛠️ Tech Stack
+
 - Frontend: React, React Router, Tailwind CSS
 - Data Fetching: Fetch API, TMDB API
 - Database & Backend: Appwrite
 
 📦 Installation
+
 Clone the repository:
 git clone https://github.com/bibinsivanandh25/movieflip
 cd movieflip
@@ -34,6 +37,7 @@ npm start
 
 
 📸 Screenshots
+
 Add relevant screenshots of the UI here.
 ![screeen-1](https://github.com/user-attachments/assets/8d900133-c8aa-4ebf-8fd4-b6b0ad4cfdec)
 ![screen-2](https://github.com/user-attachments/assets/139c8187-124e-4ed1-b077-8372eeea21c3)
@@ -43,5 +47,6 @@ Add relevant screenshots of the UI here.
 
 
 🔗 API Reference
- - TMDB API Docs
- - Appwrite Docs
+
+ - [TMDB API Docs](https://developer.themoviedb.org/)  
+ - [Appwrite Docs](https://appwrite.io/docs)  
